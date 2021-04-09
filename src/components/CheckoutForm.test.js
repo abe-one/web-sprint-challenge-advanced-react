@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import CheckoutForm from "./CheckoutForm";
 
 // Write up the two tests here and make sure they are testing what the title shows
@@ -9,7 +9,7 @@ test("form header renders", () => {
   expect(render(<CheckoutForm />));
 });
 
-test("form shows success message on submit with form details", () => {
+test("form shows success message on submit with form details", async () => {
   /////////////////////  Arrange  /////////////////////
   render(<CheckoutForm />);
   // Selectors
@@ -38,5 +38,24 @@ test("form shows success message on submit with form details", () => {
   userEvent.type(zipInput, zipValue);
   userEvent.click(checkoutBtn);
 
+  // expect(screen.getByTestId("successMessage")).toBeInTheDocument();
   /////////////////////  Assert  /////////////////////
+
+  /////////////////////  NOTE NOTE   /////////////////////
+  /////////////////////  NOTE NOTE   /////////////////////
+  /*
+        Manually added jest package and set it as test environment
+        SEE: https://github.com/testing-library/dom-testing-library/releases/tag/v7.0.0 
+        SEE: https://github.com/testing-library/dom-testing-library/issues/477
+        SEE: package.json.scripts.test
+        SEE: package.json.devDependencies
+        */
+  /////////////////////  NOTE NOTE   /////////////////////
+  /////////////////////  NOTE NOTE   /////////////////////
+
+  await waitFor(() => {
+    const successDiv = screen.getByTestId("successMessage");
+    expect(successDiv).toBeInTheDocument();
+    // expect(successDiv.innerHTML).toContain(addressValue);
+  });
 });
