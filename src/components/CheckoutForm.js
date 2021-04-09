@@ -12,10 +12,13 @@ const initialValue = {
 const useForm = (initialInputs) => {
   //use state
   const [inputs, setInputs] = useState(initialInputs);
+
   const handleInputs = (e) =>
-    setInputs({ ...initialInputs, [e.target.name]: e.target.value });
-  // returns input and higher-order containing setInput
-  return [inputs, handleInputs];
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+
+  const resetInputs = (e) => setInputs(initialInputs);
+
+  return [inputs, handleInputs, resetInputs];
 };
 
 // This form should be handled by a "useForm" custom hook
@@ -23,15 +26,12 @@ const useForm = (initialInputs) => {
 // and replace the necessary stateful logic from CheckoutForm with the hook
 
 const CheckoutForm = (props) => {
-  const [testInputs, handleTest] = useForm("initialValue");
-  console.log(testInputs);
-
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
+  const [values, handleChanges, resetValues] = useForm(initialValue);
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const handleChanges = (e) => {
+  //   setValues({ ...values, [e.target.name]: e.target.value });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
