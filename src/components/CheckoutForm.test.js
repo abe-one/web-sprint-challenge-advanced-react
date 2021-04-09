@@ -38,7 +38,6 @@ test("form shows success message on submit with form details", async () => {
   userEvent.type(zipInput, zipValue);
   userEvent.click(checkoutBtn);
 
-  // expect(screen.getByTestId("successMessage")).toBeInTheDocument();
   /////////////////////  Assert  /////////////////////
 
   /////////////////////  NOTE NOTE   /////////////////////
