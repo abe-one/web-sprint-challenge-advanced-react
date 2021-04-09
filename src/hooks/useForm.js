@@ -1,9 +1,9 @@
-import { useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 
 // write your custom hook here to control your checkout form
-const useForm = (initialInputs) => {
+const useForm = (formKey, initialInputs) => {
   //use state
-  const [inputs, setInputs] = useState(initialInputs);
+  const [inputs, setInputs] = useLocalStorage(formKey, initialInputs);
 
   const handleInputs = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });

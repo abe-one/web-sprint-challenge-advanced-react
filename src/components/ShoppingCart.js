@@ -6,11 +6,8 @@ import useLocalStorage from "../hooks/useLocalStorage";
 export default function ShoppingCart(props) {
   const total = props.cart.reduce((sum, d) => sum + d.price, 0);
 
-  const [bool, setBool] = useLocalStorage("bool", true);
-
   return (
     <div className="cart">
-      <button onClick={(e) => setBool(!bool)}></button>
       {props.cart.map((plant) => (
         <div className="plant-card" key={plant.id}>
           <img className="plant-image" src={plant.img} alt={plant.name} />
