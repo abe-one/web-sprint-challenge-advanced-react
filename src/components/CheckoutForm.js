@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useForm from "../hooks/useForm";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const initialValue = {
   firstName: "",
@@ -16,11 +17,20 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, handleChanges] = useForm("checkoutFormValues", initialValue);
+  const [values, handleChanges, resetValues] = useForm(
+    "checkoutFormValues",
+    initialValue
+  );
+  const [submittedValues, setSubmittedValues] = useLocalStorage(
+    "checkoutSubmission",
+    values
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSubmittedValues(values);
     setShowSuccessMessage(true);
+    resetValues();
   };
 
   return (
@@ -75,11 +85,12 @@ const CheckoutForm = (props) => {
           <br />
           <br />
           <p>
-            {values.firstName} {values.lastName}
+            {submittedValues.firstName} {submittedValues.lastName}
           </p>
-          <p>{values.address}</p>
+          <p>{submittedValues.address}</p>
           <p>
-            {values.city}, {values.state} {values.zip}
+            {submittedValues.city}, {submittedValues.state}{" "}
+            {submittedValues.zip}
           </p>
         </div>
       )}
