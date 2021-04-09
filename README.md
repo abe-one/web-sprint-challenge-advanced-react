@@ -93,9 +93,9 @@ When completing these goals, make sure to use a **new branch** to ensure your MV
 
 After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing, stretch your limits and see if you can deliver on the following optional goals:
 
-- [ ] Reset on submit
-- [ ] Persist submission
-- [ ] Persist fields
+- [x] Persist submission
+- [x] Reset on submit
+- [x] Persist fields
 
 - [ ] Add a filter input to the plant list page.
 - [ ] Build and implement another custom hook - a dark mode hook would be great for this project, though you'll have to style the light theme 🌙
