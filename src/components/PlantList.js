@@ -12,7 +12,19 @@ export default class PlantList extends Component {
     };
   }
 
-  handleChange = (e) => {};
+  handleChange = (e) => {
+    const value = e.target.value;
+    this.setState({
+      filter: value,
+    });
+    if (value !== "") {
+      this.setState({
+        plantsDisplayed: this.state.plants.filter((p) => p.light === value),
+      });
+    } else {
+      this.setState({ plantsDisplayed: this.state.plants });
+    }
+  };
   // add state with a property called "plants" - initialize as an empty array
 
   // when the component mounts:
@@ -30,6 +42,10 @@ export default class PlantList extends Component {
       .catch((err) => console.log(err.error[0]));
   }
 
+  // componentDidUpdate(){
+
+  // }
+
   render() {
     return (
       <>
@@ -38,9 +54,10 @@ export default class PlantList extends Component {
           value={this.state.filter}
           onChange={this.handleChange}
         >
-          <option name="direct" value="direct">
-            Direct
-          </option>
+          <option value="">By Sunlight</option>
+          <option value="direct">Direct</option>
+          <option value="indirect">InDirect</option>
+          <option value="low">Low</option>
         </select>
         <main className="plant-list">
           {this.state?.plantsDisplayed?.map((plant) => (
