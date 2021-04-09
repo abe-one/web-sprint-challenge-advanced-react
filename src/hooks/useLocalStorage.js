@@ -2,17 +2,17 @@ import { useState } from "react";
 
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
-    const locallyStoredValue = localStorage.getItem(key);
+    const locallyStoredValue = window.localStorage.getItem(key);
     if (locallyStoredValue) {
       return JSON.parse(locallyStoredValue);
     }
 
-    localStorage.setItem(key, JSON.stringify(initialValue));
+    window.localStorage.setItem(key, JSON.stringify(initialValue));
     return initialValue;
   });
 
   const setLocalStorage = (value) => {
-    localStorage.setItem(key, JSON.stringify(initialValue));
+    window.localStorage.setItem(key, JSON.stringify(value));
     setValue(value);
   };
 

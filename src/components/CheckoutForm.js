@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useForm from "../hooks/useForm";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 const initialValue = {
   firstName: "",
